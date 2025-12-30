@@ -6,7 +6,7 @@ package com.puskesmas.inventory.web.config;
 public final class AppConfig {
     
     public static final String DB_URL = System.getenv().getOrDefault(
-        "DB_URL", "jdbc:postgresql://localhost:5432/puskesmas_db"
+        "DB_URL", "jdbc:postgresql://localhost:5432/puskesmas"
     );
     
     public static final String DB_USER = System.getenv().getOrDefault(
