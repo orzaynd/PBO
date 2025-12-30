@@ -52,6 +52,12 @@ public class AuthFilter implements Filter {
     }
 
     private boolean isPublicResource(String path) {
+        // Allow root path
+        if (path.equals("/inventory") || path.equals("/inventory/") || 
+            path.endsWith("/inventory/index.jsp")) {
+            return true;
+        }
+        
         return path.contains("/css/") || 
                path.contains("/js/") || 
                path.contains("/img/") || 

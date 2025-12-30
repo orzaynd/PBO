@@ -40,6 +40,8 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Public Resources</web-resource-name>
+            <url-pattern>/</url-pattern>
+            <url-pattern>/*.jsp</url-pattern>
             <url-pattern>/css/*</url-pattern>
             <url-pattern>/js/*</url-pattern>
             <url-pattern>/img/*</url-pattern>
