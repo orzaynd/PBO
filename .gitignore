@@ -1,1 +1,30 @@
-/target/
+# Maven build artifacts
+target/
+*.war
+*.jar
+*.class
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*~
+*.swp
+*.bak
+
+# Environment
+.env
+.env.local

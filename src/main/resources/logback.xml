@@ -21,7 +21,7 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="dev.oryzaa.projekpbo" level="INFO"/>
+    <logger name="com.puskesmas.inventory" level="INFO"/>
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
