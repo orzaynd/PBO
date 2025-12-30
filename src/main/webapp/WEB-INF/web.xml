@@ -4,7 +4,7 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
     
-    <display-name>Stok Obat Management System</display-name>
+    <display-name>Puskesmas Inventory System</display-name>
     <description>Puskesmas Inventory Management System</description>
 
     <!-- Session Configuration -->
@@ -23,7 +23,7 @@
             <url-pattern>/dashboard</url-pattern>
             <url-pattern>/obat</url-pattern>
             <url-pattern>/transaksi-masuk</url-pattern>
-            <url-pattern>/transaksi-keluar</url-parameter>
+            <url-pattern>/transaksi-keluar</url-pattern>
             <url-pattern>/laporan</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
