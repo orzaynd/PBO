@@ -1,21 +1,50 @@
 package dev.oryzaa.projekpbo.web.util;
 
+import dev.oryzaa.projekpbo.web.config.AppConfig;
 import org.mindrot.jbcrypt.BCrypt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class PasswordUtil {
+/**
+ * Utility for password hashing and verification using bcrypt.
+ */
+public final class PasswordUtil {
 
-    public static String hash(String raw) {
-        return BCrypt.hashpw(raw, BCrypt.gensalt(10));
+    private static final Logger log = LoggerFactory.getLogger(PasswordUtil.class);
+
+    private PasswordUtil() {
+        throw new AssertionError("Cannot instantiate utility class");
     }
 
-    public static boolean matches(String raw, String hashed) {
-        if (hashed == null || raw == null) {
+    /**
+     * Hash a plain text password using bcrypt.
+     *
+     * @param rawPassword the plain text password
+     * @return the hashed password
+     */
+    public static String hash(String rawPassword) {
+        if (rawPassword == null || rawPassword.isEmpty()) {
+            throw new IllegalArgumentException("Password cannot be empty");
+        }
+        return BCrypt.hashpw(rawPassword, BCrypt.gensalt(AppConfig.BCRYPT_STRENGTH));
+    }
+
+    /**
+     * Verify a plain text password against a hashed password.
+     *
+     * @param rawPassword the plain text password
+     * @param hashedPassword the hashed password
+     * @return true if password matches, false otherwise
+     */
+    public static boolean matches(String rawPassword, String hashedPassword) {
+        if (hashedPassword == null || rawPassword == null) {
             return false;
         }
         try {
-            return BCrypt.checkpw(raw, hashed);
-        } catch (Exception ex) {
-            return raw.equals(hashed);
+            return BCrypt.checkpw(rawPassword, hashedPassword);
+        } catch (IllegalArgumentException e) {
+            log.warn("Invalid password hash format", e);
+            return false;
         }
     }
 }

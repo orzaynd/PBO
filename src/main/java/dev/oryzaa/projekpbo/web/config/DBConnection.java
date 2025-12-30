@@ -4,24 +4,30 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBConnection {
-
-    private static final String DEFAULT_URL = "jdbc:postgresql://localhost:5432/puskesmas_db";
-    private static final String DEFAULT_USER = "postgres";
-    private static final String DEFAULT_PASSWORD = "shapiere32145";
+/**
+ * Database connection manager.
+ */
+public final class DBConnection {
 
     static {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("PostgreSQL Driver not found", e);
+            throw new ExceptionInInitializerError("PostgreSQL Driver not found: " + e.getMessage());
         }
     }
 
+    private DBConnection() {
+        throw new AssertionError("Cannot instantiate utility class");
+    }
+
+    /**
+     * Get a new database connection.
+     *
+     * @return a database connection
+     * @throws SQLException if connection fails
+     */
     public static Connection getConnection() throws SQLException {
-        String url = System.getenv().getOrDefault("DB_URL", DEFAULT_URL);
-        String user = System.getenv().getOrDefault("DB_USER", DEFAULT_USER);
-        String password = System.getenv().getOrDefault("DB_PASSWORD", DEFAULT_PASSWORD);
-        return DriverManager.getConnection(url, user, password);
+        return DriverManager.getConnection(AppConfig.DB_URL, AppConfig.DB_USER, AppConfig.DB_PASSWORD);
     }
 }
